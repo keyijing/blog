@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<div class="container">
+  <aside class="sidebar">
+    {{ content }}
+  </aside>
+  <main class="content post-index" aria-label="Posts">
+    <div class="post-list">
+      {% assign posts = site.pages | where: "post", true | sort: "date" | reverse %}
+      {% for post in posts %}
+      {% if post.listed != false %}
+      <article class="post-card">
+        <div class="post-card-header">
+          <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          {% if post.date %}
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+          {% endif %}
+        </div>
+        <div class="post-description">
+          {% if post.description %}
+          {{ post.description | markdownify | remove: '<p>' | remove: '</p>' }}
+          {% else %}
+          {{ post.content | strip_html | truncate: 160 }}
+          {% endif %}
+        </div>
+        {% if post.tags %}
+        <div class="tag-row">
+          {% for tag in post.tags %}
+          <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </article>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </main>
+</div>

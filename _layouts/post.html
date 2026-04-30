@@ -1,0 +1,23 @@
+---
+layout: default
+---
+<main class="post-container content">
+  <article class="post">
+    <header class="post-header">
+      <a href="{{ '/' | relative_url }}" class="back-link"><i class="fas fa-arrow-left"></i> All Posts</a>
+      <h2>{{ page.title }}</h2>
+      <div class="post-meta">
+        {% if page.date %}
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+        {% endif %}
+        {% if page.tags %}
+        {% if page.date %}<span class="meta-separator">/</span>{% endif %}
+        <span>{{ page.tags | join: ", " }}</span>
+        {% endif %}
+      </div>
+    </header>
+    <div class="post-body">
+      {{ content }}
+    </div>
+  </article>
+</main>

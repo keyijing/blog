@@ -1,0 +1,17 @@
+title: Yijing Ke Blog
+description: Short notes, technical writeups, and occasional thoughts.
+repository: keyijing/blog
+url: ""
+baseurl: ""
+
+markdown: kramdown
+permalink: pretty
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - CLAUDE.md
