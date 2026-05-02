@@ -10,10 +10,16 @@ tags:
   - markdown
 ---
 
-This post is a compact Markdown test page. Add new articles by creating folders under `blog` with names like:
+This post is a compact Markdown test page. Add new articles by creating folders at the site root with names like:
 
 ```text
-blog/your-title/index.md
+your-title/index.md
+```
+
+Nested post names are supported too:
+
+```text
+notes/jekyll/your-title/index.md
 ```
 
 Each post starts with front matter:
@@ -35,8 +41,8 @@ tags:
 Then write the article body in regular Markdown. Attachments for this post can live next to `index.md`, for example:
 
 ```text
-blog/your-title/image.png
-blog/your-title/notes.pdf
+your-title/image.png
+your-title/notes.pdf
 ```
 
 This post includes a small [example attachment](example.txt) stored beside its `index.md`.

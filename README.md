@@ -13,10 +13,9 @@ _layouts/
   default.html           # Base HTML shell: document head, CSS, icon CDNs, KaTeX, feed metadata, SEO metadata.
   home.html              # Homepage layout: left-column `index.md` content and newest-to-oldest post cards.
   post.html              # Individual post layout: single-column post title, date, tags, and Markdown body.
-blog/
-  welcome/
-    index.md             # Example Markdown blog post.
-    example.txt          # Example post attachment stored beside the post.
+welcome/
+  index.md               # Example Markdown blog post.
+  example.txt            # Example post attachment stored beside the post.
 feed/
   blog.xml               # Atom feed generated from pages marked `post: true`.
 _sass/
@@ -29,10 +28,16 @@ Generated folders such as `_site/`, `.sass-cache/`, and `.jekyll-cache/` are ign
 
 ## Write a Post
 
-Create a folder in `blog`, then put the post body in `index.md`:
+Create a folder at the site root, then put the post body in `index.md`:
 
 ```text
-blog/your-title/index.md
+your-title/index.md
+```
+
+The post name can include multiple directory levels:
+
+```text
+notes/jekyll/your-title/index.md
 ```
 
 Use front matter at the top:
@@ -55,15 +60,16 @@ The homepage lists every page marked `post: true` automatically, sorted by `date
 Put post-specific attachments next to `index.md`:
 
 ```text
-blog/your-title/image.png
-blog/your-title/notes.pdf
+your-title/image.png
+your-title/notes.pdf
 ```
 
 ## Behavior
 
-- Posts are regular Jekyll pages stored at `blog/<slug>/index.md`.
+- Posts are regular Jekyll pages stored at `<name>/index.md` from the site root.
+- `<name>` may be a single folder such as `your-title` or a nested path such as `notes/jekyll/your-title`.
 - Mark a page with `post: true` so the homepage and feed treat it as a blog post.
-- Files next to a post's `index.md` are copied beside the rendered page, so `blog/welcome/example.txt` becomes `/blog/welcome/example.txt`.
+- Files next to a post's `index.md` are copied beside the rendered page, so `welcome/example.txt` becomes `/welcome/example.txt`.
 - Post folder names do not include dates; use front matter `date: YYYY-MM-DD` for both sorting and display.
 - The homepage sorts posts by front matter `date` in descending order, so newer posts appear first.
 - Set `listed: false` in a post's front matter to keep it published at its URL but hide it from the homepage list.
@@ -83,7 +89,7 @@ blog/your-title/notes.pdf
 | Site title, description, repository, permalink style, plugins | `_config.yml` |
 | Colors, spacing, post card hover state, responsive behavior | `_sass/main.scss` |
 | Sass import entry point | `assets/css/style.scss` |
-| Blog posts and post attachments | `blog/<slug>/` |
+| Blog posts and post attachments | `<name>/` |
 
 The homepage intentionally renders only the `index.md` sidebar introduction and the post list. Individual posts use a single-column layout without the homepage sidebar.
 

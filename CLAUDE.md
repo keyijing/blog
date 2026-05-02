@@ -9,7 +9,8 @@ Jekyll-based Markdown blog using the visual style of `keyijing.github.io`. See `
 - Prefer editing existing files over creating new ones.
 - Keep the blog introduction/sidebar prose in Markdown (`index.md`).
 - Do not use `_data/homepage.yml` or `_includes/inline-md.html`; those belonged to the source homepage project and are not part of this blog.
-- Keep each blog post in `blog/<slug>/index.md`, with front matter for `layout: post`, `post: true`, `title`, `date`, optional `description`, and optional `tags`.
+- Keep each blog post in `<name>/index.md` at the site root, with front matter for `layout: post`, `post: true`, `title`, `date`, optional `description`, and optional `tags`.
+- Allow `<name>` to contain multiple directory levels, such as `notes/jekyll/my-post/index.md`.
 - Keep post folder names free of dates; sorting and display dates come from front matter.
 - Store post-specific attachments next to that post's `index.md`.
 - The homepage and feed discover posts by filtering `site.pages` for `post: true`.
@@ -25,7 +26,8 @@ Jekyll-based Markdown blog using the visual style of `keyijing.github.io`. See `
 
 - The homepage sidebar content is written directly in `index.md`.
 - Post pages are single-column and do not include the homepage sidebar.
-- Posts are Markdown files at `blog/<slug>/index.md`; the homepage lists them from newest to oldest by front matter `date`.
+- Posts are Markdown files at `<name>/index.md`; the homepage lists them from newest to oldest by front matter `date`.
+- Post names may be nested paths, such as `notes/jekyll/my-post`.
 - Keep `_layouts` limited to `default.html`, `home.html`, and `post.html`.
 
 ## Pre-commit Checklist
