@@ -2,6 +2,7 @@
 
 require "cgi"
 require "jekyll/converters/markdown/kramdown_parser"
+require "nokogiri"
 
 module Jekyll
   module Utils
@@ -18,20 +19,18 @@ module Jekyll
   module Converters
     class Markdown
       class MathProtectedKramdown
-        ALERT_TITLES = {
-          "note" => "Note",
-          "tip" => "Tip",
-          "important" => "Important",
-          "warning" => "Warning",
-          "caution" => "Caution",
-          "success" => "Success",
-          "idea" => "Idea",
+        ADMONITIONS = {
+          "blue" => "circle-info",
+          "green" => "circle-check",
+          "teal" => "circle-info",
+          "purple" => "star",
+          "yellow" => "lightbulb",
+          "amber" => "triangle-exclamation",
+          "orange" => "triangle-exclamation",
+          "red" => "circle-xmark",
         }.freeze
 
-        ALERT_RE = /
-          <blockquote>\s*
-          <p>\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION|SUCCESS|IDEA)\]\+?\s*(.*?)<\/p>
-        /imx.freeze
+        ADMONITION_RE = /\A\s*\[!(#{ADMONITIONS.keys.join("|")})(?:(?:\||\s+)([A-Za-z][A-Za-z,\s-]*))?\]([+-])?\s*(.*?)\s*\z/im.freeze
 
         FENCE_RE = /\A(?: {0,3}> ?)* {0,3}(`{3,}|~{3,})/.freeze
         PLACEHOLDER_PREFIX = "MATHPROTECTED"
@@ -225,12 +224,64 @@ module Jekyll
         end
 
         def convert_alerts(html)
-          html.gsub(ALERT_RE) do
-            type = Regexp.last_match(1).downcase
-            title = Regexp.last_match(2).strip
-            title = ALERT_TITLES.fetch(type) if title.empty?
-            %(<blockquote class="admonition admonition-#{type}">\n  <p>#{title}</p>)
+          fragment = Nokogiri::HTML.fragment(html)
+          fragment.css("blockquote").reverse_each do |blockquote|
+            convert_alert_blockquote(blockquote)
           end
+          fragment.to_html
+        end
+
+        def convert_alert_blockquote(blockquote)
+          first_child = blockquote.element_children.first
+          return unless first_child&.name == "p"
+
+          match = first_child.inner_html.match(ADMONITION_RE)
+          return unless match
+
+          type = match[1].downcase
+          options = match[2].to_s.downcase.split(/[,\s]+/)
+          state = match[3]
+          title = match[4].strip
+          icon = ADMONITIONS.fetch(type)
+          inline = options.include?("inline")
+          title = type.capitalize if title.empty? && !inline
+
+          blockquote.replace(admonition_node(blockquote, first_child, type, icon, state, title, inline))
+        end
+
+        def admonition_node(blockquote, title_source, type, icon, state, title, inline)
+          document = blockquote.document
+          collapsible = !state.nil? && !inline
+          container = Nokogiri::XML::Node.new(collapsible ? "details" : "blockquote", document)
+          classes = ["admonition", "admonition-#{type}"]
+          classes << "admonition-inline" if inline
+          container["class"] = classes.join(" ")
+          container["open"] = "open" if state == "+"
+
+          container.add_child(admonition_title_node(document, collapsible, icon, title)) unless inline
+          if inline && !title.empty?
+            title_source.inner_html = title
+          else
+            title_source.remove
+          end
+          container.add_child(admonition_body_node(document, blockquote))
+          container
+        end
+
+        def admonition_title_node(document, collapsible, icon, title)
+          title_node = Nokogiri::XML::Node.new(collapsible ? "summary" : "div", document)
+          title_node["class"] = "admonition-title"
+          title_node.inner_html = %(<i class="admonition-icon fa-solid fa-#{icon}" aria-hidden="true"></i><span class="admonition-title-text">#{title}</span>)
+          title_node
+        end
+
+        def admonition_body_node(document, blockquote)
+          body = Nokogiri::XML::Node.new("div", document)
+          body["class"] = "admonition-body"
+          blockquote.children.to_a.each do |child|
+            body.add_child(child.unlink)
+          end
+          body
         end
 
         def restore_math(html, math_spans)

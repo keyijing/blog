@@ -83,7 +83,7 @@ your-title/notes.pdf
 - The Atom feed for blog posts is rendered by `feed/blog.xml` at `/feed/blog.xml`.
 - Markdown is rendered by a local Jekyll processor that protects math before kramdown parses the page.
 - Math rendering is provided by browser-side KaTeX in `_layouts/default.html` and supports `$...$`, `$$...$$`, `\(...\)`, and `\[...\]`.
-- GitHub-style alerts such as `> [!NOTE]`, `> [!TIP]`, `> [!SUCCESS]`, and `> [!IDEA]` are converted to styled admonitions during Markdown rendering.
+- Color admonitions are converted to styled callouts during Markdown rendering. Supported types are `blue` (`circle-info`), `green` (`circle-check`), `teal` (`circle-info`), `purple` (`star`), `yellow` (`lightbulb`), `amber` (`triangle-exclamation`), `orange` (`triangle-exclamation`), and `red` (`circle-xmark`). Use `> [!color]` for a static callout, `> [!color]+` for collapsible/open, `> [!color]-` for collapsible/closed, and `> [!color inline]` for a body-only callout with no icon or title header.
 
 ## Customization
 

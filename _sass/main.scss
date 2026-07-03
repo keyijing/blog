@@ -295,52 +295,155 @@ a {
     color: #555;
   }
 
-  blockquote.admonition {
-    padding: 10px 14px;
-    border-left-width: 4px;
-    border-radius: 4px;
-    color: #333;
-    background: #fff;
+  .admonition {
+    --admonition-accent: #777;
+    --admonition-title-bg: #f2f2f2;
+    --admonition-body-bg: #fff;
+    --admonition-border: #ddd;
 
-    > p:last-child {
+    margin: 16px 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--admonition-border);
+    border-left: 4px solid var(--admonition-accent);
+    border-radius: 5px;
+    color: #333;
+    background: var(--admonition-body-bg);
+
+    .admonition {
+      margin: 12px 0;
+    }
+  }
+
+  blockquote.admonition {
+    padding-left: 0;
+  }
+
+  details.admonition {
+    display: block;
+  }
+
+  .admonition-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--admonition-border);
+    color: #222;
+    font-weight: 650;
+    line-height: 1.35;
+    background: var(--admonition-title-bg);
+  }
+
+  summary.admonition-title {
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: "\f078";
+      margin-left: auto;
+      color: var(--admonition-accent);
+      font-family: "Font Awesome 6 Free";
+      font-size: 0.8rem;
+      font-weight: 900;
+      transition: transform 120ms ease;
+    }
+  }
+
+  details:not([open]) > summary.admonition-title {
+    border-bottom: 0;
+  }
+
+  details[open] > summary.admonition-title::after {
+    transform: rotate(180deg);
+  }
+
+  .admonition-icon {
+    flex: 0 0 auto;
+    color: var(--admonition-accent);
+    font-size: 0.98rem;
+  }
+
+  .admonition-title-text {
+    min-width: 0;
+  }
+
+  .admonition-body {
+    padding: 10px 14px;
+    background: var(--admonition-body-bg);
+
+    > :last-child {
       margin-bottom: 0;
     }
+  }
 
-    > p:first-child {
-      margin-bottom: 4px;
-      font-weight: 650;
+  .admonition-inline {
+    margin: 10px 0;
+
+    .admonition-body {
+      padding: 8px 12px;
     }
   }
 
-  .admonition-note {
-    border-left-color: #2f80ed;
-    background: #f5f9ff;
+  .admonition-blue {
+    --admonition-accent: #2f80ed;
+    --admonition-title-bg: #eaf3ff;
+    --admonition-body-bg: #fbfdff;
+    --admonition-border: #c8ddfb;
   }
 
-  .admonition-tip,
-  .admonition-idea {
-    border-left-color: #00a88f;
-    background: #f3fbf8;
+  .admonition-green {
+    --admonition-accent: #2f9e44;
+    --admonition-title-bg: #e8f7ec;
+    --admonition-body-bg: #fbfefc;
+    --admonition-border: #c4e8cc;
   }
 
-  .admonition-success {
-    border-left-color: #2f9e44;
-    background: #f4fbf5;
+  .admonition-teal {
+    --admonition-accent: #009b8e;
+    --admonition-title-bg: #e3f7f4;
+    --admonition-body-bg: #fbfefe;
+    --admonition-border: #b7e4dd;
   }
 
-  .admonition-important {
-    border-left-color: #8b5cf6;
-    background: #f7f4ff;
+  .admonition-purple {
+    --admonition-accent: #7c3aed;
+    --admonition-title-bg: #f1eaff;
+    --admonition-body-bg: #fdfbff;
+    --admonition-border: #d7c8fb;
   }
 
-  .admonition-warning {
-    border-left-color: #f59f00;
-    background: #fff9ed;
+  .admonition-yellow {
+    --admonition-accent: #ca8a04;
+    --admonition-title-bg: #fef3c7;
+    --admonition-body-bg: #fffdf4;
+    --admonition-border: #f3d46b;
   }
 
-  .admonition-caution {
-    border-left-color: #e03131;
-    background: #fff5f5;
+  .admonition-amber {
+    --admonition-accent: #d97706;
+    --admonition-title-bg: #fff1d7;
+    --admonition-body-bg: #fffdfa;
+    --admonition-border: #f1d39a;
+  }
+
+  .admonition-orange {
+    --admonition-accent: #ea580c;
+    --admonition-title-bg: #ffedd5;
+    --admonition-body-bg: #fffaf7;
+    --admonition-border: #fed7aa;
+  }
+
+  .admonition-red {
+    --admonition-accent: #dc2626;
+    --admonition-title-bg: #fee7e7;
+    --admonition-body-bg: #fffafa;
+    --admonition-border: #f4bcbc;
   }
 
   code {
