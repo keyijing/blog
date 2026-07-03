@@ -295,6 +295,54 @@ a {
     color: #555;
   }
 
+  blockquote.admonition {
+    padding: 10px 14px;
+    border-left-width: 4px;
+    border-radius: 4px;
+    color: #333;
+    background: #fff;
+
+    > p:last-child {
+      margin-bottom: 0;
+    }
+
+    > p:first-child {
+      margin-bottom: 4px;
+      font-weight: 650;
+    }
+  }
+
+  .admonition-note {
+    border-left-color: #2f80ed;
+    background: #f5f9ff;
+  }
+
+  .admonition-tip,
+  .admonition-idea {
+    border-left-color: #00a88f;
+    background: #f3fbf8;
+  }
+
+  .admonition-success {
+    border-left-color: #2f9e44;
+    background: #f4fbf5;
+  }
+
+  .admonition-important {
+    border-left-color: #8b5cf6;
+    background: #f7f4ff;
+  }
+
+  .admonition-warning {
+    border-left-color: #f59f00;
+    background: #fff9ed;
+  }
+
+  .admonition-caution {
+    border-left-color: #e03131;
+    background: #fff5f5;
+  }
+
   code {
     font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
     font-size: 0.88em;

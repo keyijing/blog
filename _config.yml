@@ -4,8 +4,11 @@ repository: keyijing/blog
 url: ""
 baseurl: ""
 
-markdown: kramdown
+markdown: MathProtectedKramdown
 permalink: pretty
+
+kramdown:
+  input: GFM
 
 plugins:
   - jekyll-seo-tag

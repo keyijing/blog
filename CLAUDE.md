@@ -19,7 +19,8 @@ Jekyll-based Markdown blog using the visual style of `keyijing.github.io`. See `
 - Primary color `#0070f3` is for links and hover states, not standalone headings.
 - Load icons via CDN; don't bundle icon fonts locally.
 - All links open in new tabs via `<base target="_blank">` in `default.html`.
-- KaTeX is loaded for math rendering (`$...$`, `$$...$$`, `\(...\)`, `\[...\]`).
+- Math is protected by `_plugins/math_protected_kramdown.rb` before kramdown parses Markdown, then rendered in the browser by KaTeX (`$...$`, `$$...$$`, `\(...\)`, `\[...\]`).
+- GitHub-style alerts are converted by `_plugins/math_protected_kramdown.rb`; keep alert styling in `_sass/main.scss`.
 - Homepage post cards should stay bordered, compact, and highlighted on hover.
 
 ## Blog Notes
@@ -41,4 +42,4 @@ bundle exec jekyll build
 bundle exec jekyll serve
 ```
 
-Uses the `github-pages` gem for GitHub Pages compatibility.
+Uses the `github-pages` gem for dependency compatibility, but does not put it in the `:jekyll_plugins` group because the local `_plugins` Markdown processor must load during builds.

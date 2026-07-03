@@ -1,3 +1,5 @@
 source "https://rubygems.org"
 
-gem "github-pages", group: :jekyll_plugins
+# Keep the GitHub Pages dependency set available without loading the
+# github-pages plugin wrapper, so local _plugins are used during builds.
+gem "github-pages"
