@@ -18,3 +18,8 @@ exclude:
   - Gemfile.lock
   - README.md
   - CLAUDE.md
+  - vendor
+  - vendor/bundle
+  - vendor/cache
+  - vendor/gems
+  - vendor/ruby
