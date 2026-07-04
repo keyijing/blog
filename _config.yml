@@ -1,8 +1,8 @@
-title: Yijing Ke Blog
+title: keyijing
 description: Short notes, technical writeups, and occasional thoughts.
 repository: keyijing/blog
-url: ""
-baseurl: ""
+url: "https://keyijing.github.io"
+baseurl: "/blog"
 
 markdown: MathProtectedKramdown
 permalink: pretty
