@@ -1,4 +1,4 @@
-# CLAUDE.md
+# AGENTS.md
 
 ## Project Overview
 
@@ -13,12 +13,14 @@ Jekyll-based Markdown blog using the visual style of `keyijing.github.io`. See `
 - Allow `<name>` to contain multiple directory levels, such as `notes/jekyll/my-post/index.md`.
 - Keep post folder names free of dates; sorting and display dates come from front matter.
 - Store post-specific attachments next to that post's `index.md`.
+- Use `post-photo` figures and `figcaption` for captioned photos or videos. Keep image widths automatic and containers fitted to their content, without a colored background or `object-fit` letterboxing. A labeled, keyboard-focusable `photo-gallery` wrapper provides native horizontal scrolling; its styles live in `_sass/main.scss`. Gallery labels may include a title and count, without usage instructions.
 - The homepage and feed discover posts by filtering `site.pages` for `post: true`.
 - Render homepage `description` fields with inline Markdown support.
 - Use SCSS variables (`$primary`) and CSS custom properties (`--primary`) for colors; keep them in sync.
 - Primary color `#0070f3` is for links and hover states, not standalone headings.
 - Load icons via CDN; don't bundle icon fonts locally.
-- All links open in new tabs via `<base target="_blank">` in `default.html`.
+- The local stylesheet URL includes a build timestamp so browsers fetch updated styles after rebuilding.
+- Links default to new tabs via `<base target="_blank">` in `default.html`; homepage post links and the post's All Posts link explicitly use `target="_self"` to navigate in the current tab.
 - Math is protected by `_plugins/math_protected_kramdown.rb` before kramdown parses Markdown, then rendered in the browser by KaTeX (`$...$`, `$$...$$`, `\(...\)`, `\[...\]`).
 - GitHub-style alerts are converted by `_plugins/math_protected_kramdown.rb`; keep alert styling in `_sass/main.scss`.
 - Homepage post cards should stay bordered, compact, and highlighted on hover.
@@ -33,7 +35,7 @@ Jekyll-based Markdown blog using the visual style of `keyijing.github.io`. See `
 
 ## Pre-commit Checklist
 
-- Always update `README.md` and `CLAUDE.md` to reflect any structural or architectural changes before committing.
+- Always update `README.md` and `AGENTS.md` to reflect any structural or architectural changes before committing.
 
 ## Build
 

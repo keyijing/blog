@@ -474,6 +474,96 @@ a {
     max-width: 100%;
     border-radius: 4px;
   }
+
+  .post-photo {
+    width: fit-content;
+    max-width: 100%;
+    margin: 18px auto 24px;
+    min-width: 0;
+
+    a {
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 4px;
+    }
+
+    img,
+    video {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 480px;
+      margin: 0 auto;
+      border-radius: 4px;
+    }
+
+    video {
+      width: 360px;
+      max-height: none;
+    }
+
+    figcaption {
+      margin-top: 8px;
+      padding: 0 4px;
+      color: #666;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+  }
+
+  .photo-gallery-hint {
+    margin: 18px 0 8px;
+    color: #666;
+    font-size: 0.8rem;
+  }
+
+  .photo-gallery {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    margin-bottom: 24px;
+    padding: 4px 4px 12px;
+    scrollbar-color: #aaa #eee;
+
+    .post-photo {
+      flex: 0 0 auto;
+      width: min-content;
+      max-width: none;
+      margin: 0;
+      scroll-snap-align: start;
+    }
+
+    img {
+      max-width: none;
+      height: clamp(180px, 56vw, 420px);
+    }
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background: #aaa;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #eee;
+    }
+
+    &:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+  }
 }
 
 @media (max-width: 640px) {

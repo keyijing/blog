@@ -6,6 +6,7 @@ A Jekyll blog using the same visual style and two-column layout as `keyijing.git
 
 ```text
 _config.yml              # Site-wide Jekyll settings: title, metadata, permalink style, plugins, post defaults.
+AGENTS.md                # Repository guidance for coding agents; excluded from the generated site.
 Gemfile                  # Ruby dependencies for GitHub Pages-compatible local builds.
 Gemfile.lock             # Locked Ruby dependency versions for reproducible local builds.
 index.md                 # Homepage entry point; its Markdown body is the left-column blog introduction.
